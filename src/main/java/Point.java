@@ -36,4 +36,13 @@ public class Point implements Feature {
         result.add(z);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Point{" +
+                "\nx=" + x +
+                "\ny=" + y +
+                "\nz=" + z +
+                '}';
+    }
 }

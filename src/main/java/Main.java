@@ -15,18 +15,34 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Hello...");
 
-        Value clickedX = new Value(1.25);
-        Value clickedY = new Value(1.78);
-        Value clickedZ = new Value(0.0625);
-        Point clickedPoint = new Point(clickedX, clickedY, clickedZ);
-        PointToPlaneDistance pointToPlaneDistance1 = new PointToPlaneDistance(Plane.XY, clickedPoint, Value.ZERO);
-        PointToPlaneDistance pointToPlaneDistance2 = new PointToPlaneDistance(Plane.YZ, clickedPoint, clickedX);
-        PointToPlaneDistance pointToPlaneDistance3 = new PointToPlaneDistance(Plane.XZ, clickedPoint, clickedY);
+        Value c1X = new Value(1.25);
+        Value c1Y = new Value(1.78);
+        Value c1Z = new Value(0.0625);
+        Point clickedPoint1 = new Point(c1X, c1Y, c1Z);
+
+        Value c2X = new Value(5.5);
+        Value c2Y = new Value(1.78);
+        Value c2Z = new Value(0.0625);
+        Point clickedPoint2 = new Point(c2X, c2Y, c2Z);
+
+        PointToPlaneDistance pointToPlaneDistance1 = new PointToPlaneDistance(Plane.XY, clickedPoint1, Value.ZERO);
+        PointToPlaneDistance pointToPlaneDistance2 = new PointToPlaneDistance(Plane.YZ, clickedPoint1, c1X);
+        PointToPlaneDistance pointToPlaneDistance3 = new PointToPlaneDistance(Plane.XZ, clickedPoint1, c1Y);
+
+        PointToPlaneDistance pointToPlaneDistance4 = new PointToPlaneDistance(Plane.XY, clickedPoint2, Value.ZERO);
+        PointToPlaneDistance pointToPlaneDistance6 = new PointToPlaneDistance(Plane.XZ, clickedPoint2, c2Y);
+
+        Value distance = new Value(Value.FIX,5.00);
+
+        PointToPointDistance pointToPointDistance = new PointToPointDistance(clickedPoint1,clickedPoint2,distance);
 
         List<Constraint> constraints = new ArrayList<>();
         constraints.add(pointToPlaneDistance1);
         constraints.add(pointToPlaneDistance2);
         constraints.add(pointToPlaneDistance3);
+        constraints.add(pointToPlaneDistance4);
+        constraints.add(pointToPlaneDistance6);
+        constraints.add(pointToPointDistance);
 
         List<Value> valueList = new ArrayList<>();
         for (Constraint constraint : constraints) {
@@ -65,7 +81,7 @@ public class Main {
                 }
             }
 
-            System.out.println("x: " + variables);
+            System.out.println("Clicked Points: " + clickedPoint1 + "\n" + clickedPoint2);
             System.out.println("Fx: " + Arrays.toString(fx));
             for (double[] line : dfx) {
                 System.out.println("dFx: " + Arrays.toString(line));
