@@ -28,8 +28,6 @@ public class Main {
         constraints.add(pointToPlaneDistance2);
         constraints.add(pointToPlaneDistance3);
 
-
-
         List<Value> valueList = new ArrayList<>();
         for (Constraint constraint : constraints) {
             valueList.addAll(constraint.getValues());
@@ -74,7 +72,7 @@ public class Main {
             }
 
             coefficients = new Array2DRowRealMatrix(dfx, false);
-            solver = new QRDecomposition(coefficients).getSolver();
+            solver = new SingularValueDecomposition(coefficients).getSolver();
             constants = new ArrayRealVector(fx, false);
             solution = solver.solve(constants);
 

@@ -2,14 +2,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PointToPlaneDistance implements Constraint {
-    private Plane plane;
-    private Point point;
-    private Value d;
+    private final Plane plane;
+    private final Point point;
+    private final Value distance;
 
-    public PointToPlaneDistance(Plane plane, Point point, Value d) {
+    public PointToPlaneDistance(Plane plane, Point point, Value distance) {
         this.plane = plane;
         this.point = point;
-        this.d = d;
+        this.distance = distance;
     }
 
     public Plane getPlane() {
@@ -20,8 +20,8 @@ public class PointToPlaneDistance implements Constraint {
         return point;
     }
 
-    public Value getD() {
-        return d;
+    public Value getDistance() {
+        return distance;
     }
 
 
@@ -29,8 +29,8 @@ public class PointToPlaneDistance implements Constraint {
     public double getValue() {
         return plane.getX().get() * point.getX().get() +
                 plane.getY().get() * point.getY().get() +
-                plane.getX().get() * point.getZ().get() +
-                d.get();
+                plane.getZ().get() * point.getZ().get() +
+                plane.getD().get() - distance.get();
     }
 
     @Override
@@ -41,6 +41,7 @@ public class PointToPlaneDistance implements Constraint {
         if (value == point.getX()) return plane.getX().get();
         if (value == point.getY()) return plane.getY().get();
         if (value == point.getZ()) return plane.getZ().get();
+        if (value == distance) return 1.0;
         return 0;
     }
 
@@ -49,7 +50,7 @@ public class PointToPlaneDistance implements Constraint {
         List<Value> result = new ArrayList<>();
         result.addAll(plane.getValues());
         result.addAll(point.getValues());
-        result.add(d);
+        result.add(distance);
         return result;
     }
 }
