@@ -12,19 +12,6 @@ public class PointToPlaneDistance implements Constraint {
         this.distance = distance;
     }
 
-    public Plane getPlane() {
-        return plane;
-    }
-
-    public Point getPoint() {
-        return point;
-    }
-
-    public Value getDistance() {
-        return distance;
-    }
-
-
     @Override
     public double getValue() {
         return plane.getX().get() * point.getX().get() +

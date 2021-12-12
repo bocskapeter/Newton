@@ -4,7 +4,6 @@ public class Value {
 
     public final static Value ZERO = new Value(FIX, 0);
     public final static Value ONE = new Value(FIX, 1.0);
-    public final static Value MINUS_ONE = new Value(FIX, -1.0);
 
     private short status;
     private double value;
