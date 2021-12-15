@@ -3,9 +3,6 @@ import java.util.List;
 
 public class Point implements Feature {
     public final static Point ORIGIN = new Point(Value.ZERO,Value.ZERO,Value.ZERO);
-    public final static Point I = new Point(Value.ONE,Value.ZERO,Value.ZERO);
-    public final static Point J = new Point(Value.ZERO,Value.ONE,Value.ZERO);
-    public final static Point K = new Point(Value.ZERO,Value.ZERO, Value.ONE);
     private Value x;
     private Value y;
     private Value z;
